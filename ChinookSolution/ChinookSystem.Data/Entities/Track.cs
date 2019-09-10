@@ -18,7 +18,7 @@ namespace ChinookSystem.Data.Entities
 
         private int _AlbumId;
 
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
 
         public int MediTypeId { get; set; }
 
@@ -48,7 +48,7 @@ namespace ChinookSystem.Data.Entities
 
         public int Milliseconds { get; set; }
 
-        public int Bytes { get; set; }
+        public int? Bytes { get; set; }
 
         public double UnitPrice { get; set; }
 
