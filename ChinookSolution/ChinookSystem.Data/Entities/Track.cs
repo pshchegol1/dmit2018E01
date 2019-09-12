@@ -22,7 +22,7 @@ namespace ChinookSystem.Data.Entities
 
         public int MediTypeId { get; set; }
 
-        public int GenreId { get; set; }
+        public int? GenreId { get; set; }
 
         private string _Composer;
 
