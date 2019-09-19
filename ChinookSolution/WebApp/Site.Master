@@ -81,6 +81,7 @@
                                 <asp:MenuItem Text="About" NavigateUrl="~/About.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="Contact" NavigateUrl="~/Contact.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="Samples" Value="Samples" NavigateUrl="~/SamplePages/FilterSearchCRUD.aspx"></asp:MenuItem>
+                               <asp:MenuItem Text="ListViewCRUDODS" Value="Samples" NavigateUrl="~/SamplePages/ListViewCRUDODS.aspx"></asp:MenuItem>
                         </Items>
 
 
