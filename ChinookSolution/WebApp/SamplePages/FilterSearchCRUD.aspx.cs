@@ -68,7 +68,7 @@ namespace WebApp.SamplePages
                     //clear the controls
                     //throw an exception
 
-                    // ClearControls();
+                    ClearControls();
                     throw new Exception("Record No longer Exist on file");
                 }
                 else
@@ -90,6 +90,54 @@ namespace WebApp.SamplePages
 
         }
 
+        protected void ClearControls()
+        {
+            EditAlbumID.Text = "";
+            EditTitle.Text = "";
+            EditReleaseYear.Text = "";
+            EditReleaseLabel.Text = "";
+            EditAlbumArtistList.SelectedIndex = 0;
+        }
 
+        protected void Add_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                string albumtitle = EditTitle.Text;
+                int albumyear =  int.Parse(EditReleaseYear.Text);
+                string albumlabel = EditReleaseLabel.Text == "" ? null : EditReleaseLabel.Text;
+                int albumartist = int.Parse(EditAlbumArtistList.SelectedValue);
+
+                Album theAlbum = new Album();
+                theAlbum.Title = albumtitle;
+                theAlbum.ArtistId = albumartist;
+                theAlbum.ReleaseYear = albumyear;
+                theAlbum.ReleaseLabel = albumlabel;
+
+                MessageUserControl.TryRun(() => 
+                {
+
+                    AlbumController sysmgr = new AlbumController();
+                    int albumid = sysmgr.Album_Add(theAlbum);
+                    EditAlbumID.Text = albumid.ToString();
+                    if(AlbumList.Rows.Count > 0)
+                    {
+                        AlbumList.DataBind();
+                    }
+                    
+
+                }, "Successful","Album Added");
+            }
+        }
+
+        protected void Update_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Remove_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
