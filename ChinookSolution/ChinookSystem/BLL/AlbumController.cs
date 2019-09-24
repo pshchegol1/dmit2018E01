@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ChinookSystem.DAL;
 using ChinookSystem.Data.Entities;
 using System.ComponentModel;
+using DMIT2018Common.UserControls;
 #endregion
 
 namespace ChinookSystem.BLL
@@ -16,6 +17,10 @@ namespace ChinookSystem.BLL
     [DataObject]
     public  class AlbumController
     {
+        #region Class Variables
+        private List<string> reasons = new List<string>();
+        #endregion
+
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Album> Album_List()
         {
@@ -53,13 +58,21 @@ namespace ChinookSystem.BLL
         #region Add, Update, Delete
 
         [DataObjectMethod(DataObjectMethodType.Insert,false)]
-        public int Album_Add(Album item)
+        public int Album_Add(Album item) 
         {
             using (var context = new ChinookContext())
             {
-                context.Albums.Add(item);//staging
-                context.SaveChanges();//comitted
-                return item.AlbumId;//returns new ID value
+               if (CheckReleaseYear(item))
+               {
+                        context.Albums.Add(item);//staging
+                        context.SaveChanges();//comitted
+                        return item.AlbumId;//returns new ID value
+               }
+               else
+               {
+                    throw new BusinessRuleException("Validation Error", reasons);
+               }
+
 
             }
         }
@@ -98,11 +111,35 @@ namespace ChinookSystem.BLL
                 }
             }
         }
-        
-
-       
 
 
+
+
+
+        #endregion
+
+        #region Support Methods
+        private bool CheckReleaseYear(Album item)
+        {
+            bool isValid = true;
+            int releaseyear;
+            if (string.IsNullOrEmpty(item.ReleaseYear.ToString()))
+            {
+                isValid = false;
+                reasons.Add("Release Year is Required");
+            }
+            else if(int.TryParse(item.ReleaseYear.ToString(),out releaseyear))
+            {
+                isValid = false;
+                reasons.Add("Release Year is not an number");
+            }
+            else if(releaseyear < 1950 || releaseyear > DateTime.Today.Year)
+            {
+                isValid = false;
+                reasons.Add(string.Format("Release Year of {0} invalid. Yeare must be between 1950 and today", releaseyear));
+            }
+            return isValid;
+        }
         #endregion
 
 
