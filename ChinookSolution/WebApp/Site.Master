@@ -82,6 +82,7 @@
                                 <asp:MenuItem Text="Contact" NavigateUrl="~/Contact.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="Samples" Value="Samples" NavigateUrl="~/SamplePages/FilterSearchCRUD.aspx"></asp:MenuItem>
                                <asp:MenuItem Text="ListViewCRUDODS" Value="Samples" NavigateUrl="~/SamplePages/ListViewCRUDODS.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="LinqPad to WebApp" Value="Samples" NavigateUrl="~/SamplePages/DisplayArtistAlbums.aspx"></asp:MenuItem>
                         </Items>
 
 
