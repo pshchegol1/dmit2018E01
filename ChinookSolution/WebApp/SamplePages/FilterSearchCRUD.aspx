@@ -38,7 +38,7 @@
         &nbsp;&nbsp;
         <asp:DropDownList ID="ArtistList" runat="server"></asp:DropDownList>
         &nbsp;&nbsp;
-        <asp:LinkButton ID="FetchAlbums" runat="server" CausesValidation="false">Fetch Albums</asp:LinkButton>
+        <asp:LinkButton ID="FetchAlbums" runat="server" CausesValidation="false" OnClick="FetchAlbums_Click">Fetch Albums</asp:LinkButton>
         <br />
         <asp:GridView ID="AlbumList" runat="server" AutoGenerateColumns="false" AllowPaging="True" PageSize="5"
             CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" DataSourceID="AlbumListODS" OnSelectedIndexChanged="AlbumList_SelectedIndexChanged">
