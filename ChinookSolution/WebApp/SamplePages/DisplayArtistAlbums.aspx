@@ -15,7 +15,11 @@
         </Columns>
     </asp:GridView>
 
-    <asp:ObjectDataSource ID="ArtistAlbumListODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Album_AlbumsOfArtist" TypeName="ChinookSystem.BLL.AlbumController">
+    <asp:ObjectDataSource ID="ArtistAlbumListODS" runat="server" OldValuesParameterFormatString="original_{0}" 
+        SelectMethod="Album_AlbumsOfArtist" TypeName="ChinookSystem.BLL.AlbumController">
 
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ArtistName" PropertyName="Text" DefaultValue="zxcvb" Name="artistname" Type="String"></asp:ControlParameter>
+        </SelectParameters>
     </asp:ObjectDataSource>
 </asp:Content>

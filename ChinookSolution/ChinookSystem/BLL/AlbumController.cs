@@ -14,14 +14,14 @@ using ChinookSystem.Data;
 
 namespace ChinookSystem.BLL
 {
-    #region Queries
+  
     [DataObject]
     public  class AlbumController
     {
         #region Class Variables
         private List<string> reasons = new List<string>();
         #endregion
-
+        #region Queries
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Album> Album_List()
         {
