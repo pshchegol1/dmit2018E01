@@ -74,3 +74,15 @@ select new
 	RYear = x.ReleaseYear,
 	RLabel = x.ReleaseLabel
 }
+
+// If the release year is unknown, use the string Unknown
+from x in Albums
+where x.ReleaseYear == 2001
+select new 
+{
+	Albutitle = x.Title,
+	ArtistName = x.Artist.Name,
+	Label = x.ReleaseLabel == null ? "Unknown": x.ReleaseLabel
+}
+
+

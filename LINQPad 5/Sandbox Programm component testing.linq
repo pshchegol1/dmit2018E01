@@ -21,7 +21,41 @@ void Main()
 		RLabel = x.ReleaseLabel
 	};
 	results.Dump();
-}
+	
+	
+	
+	var customerlist = from x in Customers
+     where x.Country.Equals("USA")
+	 && x.Email.Contains("yahoo.com")
+	 orderby x.LastName, x.FirstName
+	 select new YahooCustomers
+	 {
+	 	Name = x.LastName + "," + x.FirstName,
+		City = x.City,
+		State = x.State,
+		Email = x.Email
+	 }
+	 customerlist.Dump();
+	
+	
+	
+		 
+	 	var whosang = from x in Tracks
+		where x.Name.Equals("Rag Doll")
+		select new
+		{
+			ArtistName = x.Album.Artist.Name,
+			AlbumTitle = x.Album.Title,
+			AlbumYear = x.Album.ReleaseYear,
+			AlbumLabel = x.Album.ReleaseLabel,
+			Composer = x.Composer
+		};
+whosang.Dump();
+		
+	
+	
+	
+}// end void Main
 
 // Define other methods and classes here
 public class AlbumsOfArtist
@@ -31,3 +65,46 @@ public class AlbumsOfArtist
 	public int RYear{get;set;}
 	public string RLabel{get;set;}
 }
+
+	 
+	 
+	 
+	 public class YahooCustomers
+	 {
+		public string Name {get;set;}
+		public string City{get;set;}
+		public string State{get;set;}
+	
+		public string Email{get;set;}
+	 }
+	 
+	 
+	 
+	 
+
+		
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 

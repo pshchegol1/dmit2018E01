@@ -32,6 +32,3 @@ var results  = from x in Albums
 // To desplay the contents of a variable in linqPad use the method .Dump()
 // This method is only used in LiqPad it is NOT a C# method
 results.Dump();
-	
-	
-	
