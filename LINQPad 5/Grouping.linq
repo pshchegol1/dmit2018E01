@@ -1,10 +1,8 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>c3acbdd8-ba7d-493f-9e49-8e882a5a3307</ID>
-    <Persist>true</Persist>
+    <ID>b4de7a79-afb7-4051-ace0-ef74b8cccca7</ID>
     <Server>.</Server>
     <Database>Chinook</Database>
-    <ShowServer>true</ShowServer>
   </Connection>
 </Query>
 
