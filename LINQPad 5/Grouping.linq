@@ -1,9 +1,10 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>b4de7a79-afb7-4051-ace0-ef74b8cccca7</ID>
+    <ID>c3acbdd8-ba7d-493f-9e49-8e882a5a3307</ID>
     <Persist>true</Persist>
     <Server>.</Server>
     <Database>Chinook</Database>
+    <ShowServer>true</ShowServer>
   </Connection>
 </Query>
 
@@ -42,7 +43,7 @@ group x by new {x.GenreId, x.MediaTypeId}
 //Report the groups   
   from x in Tracks
   group x by x.GenreId into gGenre
-  select (gGenre)
+
   
 
    //details on each group
@@ -140,15 +141,3 @@ select new
 	}
 	
 }
-
-
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
