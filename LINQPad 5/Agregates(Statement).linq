@@ -86,26 +86,3 @@ var result5 = (Artists.Select(x => x.Albums.Count())).Max();
 		
 //var maxcount = result5.Max();
 //maxcount.Dump();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
