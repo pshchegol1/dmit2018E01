@@ -1,7 +1,6 @@
 <Query Kind="Statements">
   <Connection>
     <ID>b4de7a79-afb7-4051-ace0-ef74b8cccca7</ID>
-    <Persist>true</Persist>
     <Server>.</Server>
     <Database>Chinook</Database>
   </Connection>
@@ -172,24 +171,3 @@ var results = from xrightside in Albums
 
 // Great examples at the following url:
 // www.dotnetlearners.com/ling
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		
-		
-		
-		
-		

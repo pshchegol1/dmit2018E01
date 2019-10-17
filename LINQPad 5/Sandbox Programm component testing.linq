@@ -1,7 +1,6 @@
 <Query Kind="Program">
   <Connection>
     <ID>b4de7a79-afb7-4051-ace0-ef74b8cccca7</ID>
-    <Persist>true</Persist>
     <Server>.</Server>
     <Database>Chinook</Database>
   </Connection>
@@ -77,34 +76,3 @@ public class AlbumsOfArtist
 	
 		public string Email{get;set;}
 	 }
-	 
-	 
-	 
-	 
-
-		
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
