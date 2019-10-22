@@ -27,29 +27,74 @@ namespace Jan2018DemoWebsite.SamplePages
 
         protected void ArtistFetch_Click(object sender, EventArgs e)
         {
-            
-                //code to go here
+
+            if (string.IsNullOrEmpty(ArtistName.Text))
+            {
+                //using MessageUserControl to display a message.
+                MessageUserControl.ShowInfo("Missing Data", "Enter Partial Artist Name.");
+            }
+            else
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    SearchArg.Text = ArtistName.Text;
+                    TracksBy.Text = "Artist";
+                    TracksSelectionList.DataBind();//Causes the ODS to execute.
+
+                }, "Tracks Search", "Select from the following list to add to yotur Playlist");
+            }
+
 
         }
 
         protected void MediaTypeFetch_Click(object sender, EventArgs e)
         {
 
-                //code to go here
+
+            
+            MessageUserControl.TryRun(() =>
+            {
+                SearchArg.Text = MediaTypeDDL.SelectedValue;
+                TracksBy.Text = "MediaType";
+                TracksSelectionList.DataBind();//Causes the ODS to execute.
+
+            }, "Tracks Search", "Select from the following list to add to yotur Playlist");
+            
 
         }
 
         protected void GenreFetch_Click(object sender, EventArgs e)
         {
 
-                //code to go here
+            MessageUserControl.TryRun(() =>
+            {
+                SearchArg.Text = GenreDDL.SelectedValue;
+                TracksBy.Text = "Genre";
+                TracksSelectionList.DataBind();//Causes the ODS to execute.
+
+            }, "Tracks Search", "Select from the following list to add to yotur Playlist");
+
 
         }
 
         protected void AlbumFetch_Click(object sender, EventArgs e)
         {
 
-                //code to go here
+            if (string.IsNullOrEmpty(AlbumTitle.Text))
+            {
+                //using MessageUserControl to display a message.
+                MessageUserControl.ShowInfo("Missing Data", "Enter Partial Album Name.");
+            }
+            else
+            {
+                MessageUserControl.TryRun(() =>
+                {
+                    SearchArg.Text = AlbumTitle.Text;
+                    TracksBy.Text = "Album";
+                    TracksSelectionList.DataBind();//Causes the ODS to execute.
+
+                }, "Tracks Search", "Select from the following list to add to yotur Playlist");
+            }
 
         }
 
