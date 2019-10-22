@@ -84,6 +84,8 @@
                                <asp:MenuItem Text="ListViewCRUDODS" Value="Samples" NavigateUrl="~/SamplePages/ListViewCRUDODS.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="LinqPad to WebApp" Value="Samples" NavigateUrl="~/SamplePages/DisplayArtistAlbums.aspx"></asp:MenuItem>
                               <asp:MenuItem Text="Repeater Display" Value="Samples" NavigateUrl="~/SamplePages/RepeaterDisplay.aspx"></asp:MenuItem>
+                            <asp:MenuItem Text="OLTP" Value="Samples" NavigateUrl="~/SamplePages/ManagePlaylist.aspx"></asp:MenuItem>
+
                         </Items>
 
 
