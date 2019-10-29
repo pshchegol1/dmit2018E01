@@ -10,6 +10,7 @@ using ChinookSystem.Data.DTOs;
 using ChinookSystem.Data.POCOs;
 using ChinookSystem.DAL;
 using System.ComponentModel;
+using DMIT2018Common.UserControls;
 #endregion
 
 namespace ChinookSystem.BLL
@@ -57,9 +58,89 @@ namespace ChinookSystem.BLL
         {
             using (var context = new ChinookContext())
             {
-                //code to go here
-                
-             
+                //Use the businessRuleExeption to throw errors to the Web Page
+                List<string> reasons = new List<string>();
+                PlaylistTrack newTrack = null;
+                int tracknumber = 0;
+
+
+                //Part One:
+                //Determine if Playlist exists
+                //query the table using the playlist name and username
+                //if the playlist exists, one will get a record
+                //if the playlist does not exist, one will get a NULL
+                //to ensure this results the query will be wrap in a .FirstOrDefault()
+
+
+                //Playlist exists = context.Playlists
+                //                    .Where(x => x.UserName.Equals(username, StringComparison.OrdinalIgnoreCase)
+                //                    && x.Name.Equals(playlistname, StringComparison.OrdinalIgnoreCase))
+                //                    .Select(x => x)
+                //                    .FirstOrDefault();
+
+
+                Playlist exists = (from x in context.Playlists
+                                    .Where(x => x.UserName.Equals(username, StringComparison.OrdinalIgnoreCase)
+                                     && x.Name.Equals(playlistname, StringComparison.OrdinalIgnoreCase))
+                                   select x).FirstOrDefault();
+
+                //Does the Playlist exists
+                if(exists == null)
+                {
+                    //this is a new playlist
+                    //create the Playlist record
+                    exists = new Playlist();
+                    exists.Name = playlistname;
+                    exists.UserName = username;
+
+                    //stage the add
+                    exists = context.Playlists.Add(exists);
+                    //since this is a new playlist, the track number will be one
+                    tracknumber = 1;
+
+                }
+                else
+                {
+                    //Since the playlist exists, so may the track exist on the olaylisttracks
+                    newTrack = exists.PlaylistTracks.SingleOrDefault(x => x.TrackId == trackid);
+                    if(newTrack == null)
+                    {
+                        tracknumber = exists.PlaylistTracks.Count() + 1;
+                    }
+                    else
+                    {
+                        reasons.Add("Track Already Exists on Playlist");
+                    }
+                }
+
+                //Part Two:
+                    //Create the playlisttrack entry
+                    //if there are any reasons not to create, then throw the businessRuleExeption
+                    if(reasons.Count() > 0)
+                    {
+                    //issue with adding the track
+                    throw new BusinessRuleException("Adding track to playlist", reasons);
+                    }
+                    else
+                    {
+                        //Use the Playlist navigation to playlisttracks to do the add to playlisttracks
+                        newTrack = new PlaylistTrack();
+                        newTrack.TrackId = trackid;
+                        newTrack.TrackNumber = tracknumber;
+
+                        //Note: the PK for playlistId may not yet exist
+                        //using the navigation property on the PlayList entity one can let HshSet handle the PlayListId PKey
+                        //value ti be properly created on PlayList ABD placed correctly in the "child" record of PlayListTracks
+
+                        //What is wrong to the attempt: newTrack.PlayListId = exists.PlayListId;
+                        exists.PlaylistTracks.Add(newTrack); //PlayListTrack staging
+                                                             //Physically add any/all data to the database
+                                                             //commit
+                        context.SaveChanges();
+
+                    }
+
+
             }
         }//eom
         public void MoveTrack(string username, string playlistname, int trackid, int tracknumber, string direction)

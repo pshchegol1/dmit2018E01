@@ -151,7 +151,40 @@ namespace Jan2018DemoWebsite.SamplePages
         protected void TracksSelectionList_ItemCommand(object sender, 
             ListViewCommandEventArgs e)
         {
-            //code to go here
+            //Do we have the playlist name
+            if (string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Required Data", "PlayList Name is Required to ADD a Track");
+            }
+            else
+            {
+                //Collect the required data for the event
+                string playlistname = PlaylistName.Text;
+                //The user name will come from the form security 
+                //so until security is added, we will use HanseB
+                string username = "HansenB";
+                //Obtain the TrackId from the listView
+                //the TrackId will be in the CommandArg property of the ListViewCommandEventArg e instance
+                //The CommandArg in e is returned as an object
+                //case it to a string, then you can .Parse the string
+                int trackid = int.Parse(e.CommandArgument.ToString());
+
+                //Using the obtained data, issue your call to the BLL Method
+                //This work will be done whinin a TryRun()
+                MessageUserControl.TryRun(() => 
+                {
+
+                    PlaylistTracksController sysmgr = new PlaylistTracksController();
+                    //there is only one call to add the data to the database
+                    sysmgr.Add_TrackToPLaylist(playlistname, username, trackid);
+
+                    //Refresh the PlayList is a READ
+                    List<UserPlaylistTrack> datainfo = sysmgr.List_TracksForPlaylist(playlistname, username);
+                    PlayList.DataSource = datainfo;
+                    PlayList.DataBind();
+
+                },"Adding a Track","Track Has been added to the Play List");
+            }
             
         }
 
