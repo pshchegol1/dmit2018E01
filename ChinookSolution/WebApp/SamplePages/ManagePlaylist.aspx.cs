@@ -239,7 +239,7 @@ namespace Jan2018DemoWebsite.SamplePages
             //  bad msg.
             if (tracknumber == 1)
             {
-                reasons.Add("Last Track Cannot be moved up ");
+                reasons.Add("First Track Cannot be moved up ");
             }
             //Validation good:
 
@@ -283,8 +283,63 @@ namespace Jan2018DemoWebsite.SamplePages
 
         protected void DeleteTrack_Click(object sender, EventArgs e)
         {
-            //code to go here
- 
+            if (string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Required Data", "PlayList Name is Required to ADD a Track");
+            }
+            else
+            {
+                if(PlayList.Rows.Count == 0)
+                {
+                    MessageUserControl.ShowInfo("Required Data", "No Play List is available. Retrieve your playlist");
+                }
+                else
+                {
+                    //Traverse the firdview and collect the list of tracks to remove.
+                    List<int> tracktodelete = new List<int>();
+                    int rowSelected = 0;
+                    CheckBox  playlistselection = null;
+                    for (int rowindex = 0; rowindex < PlayList.Rows.Count; rowindex++)
+                    {
+                        //Access the control on the indexed GridViewRow
+                        //Set the CheckBox pointer to this checkbox control
+                        playlistselection = PlayList.Rows[rowindex].FindControl("Selected") as CheckBox;
+                        if (playlistselection.Checked)
+                        {
+                            //Increment selected number of rows
+                            rowSelected++;
+                            //Gather the data needed for the BLL call.
+                            tracktodelete.Add(int.Parse((PlayList.Rows[rowindex].FindControl("TrackID") as Label).Text));
+
+                           
+                        }
+                    }
+                    if (rowSelected == 0)
+                    {
+                        MessageUserControl.ShowInfo("Required Data", "PlayList Name is Required to Remove a Track");
+                    }
+                    else
+                    {
+                        //Using the obtained data, issue your call to the BLL Method
+                        //This work will be done whinin a TryRun()
+                        MessageUserControl.TryRun(() =>
+                        {
+
+                            PlaylistTracksController sysmgr = new PlaylistTracksController();
+                            //there is only one call to add the data to the database
+                            sysmgr.DeleteTracks("HansenB", PlaylistName.Text,tracktodelete);
+
+                            //Refresh the PlayList is a READ
+                            List<UserPlaylistTrack> datainfo = sysmgr.List_TracksForPlaylist(PlaylistName.Text, "HansenB");
+                            PlayList.DataSource = datainfo;
+                            PlayList.DataBind();
+
+                        }, "Adding a Track", "Track Has been added to the Play List");
+                    }
+                }
+            }
+
+
         }
 
         protected void TracksSelectionList_ItemCommand(object sender, 

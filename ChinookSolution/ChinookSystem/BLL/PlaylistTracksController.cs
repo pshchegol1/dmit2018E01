@@ -236,8 +236,50 @@ namespace ChinookSystem.BLL
         {
             using (var context = new ChinookContext())
             {
-               //code to go here
 
+                //Playlist exists?
+
+                //  NO: Message
+          
+                var exists = (from x in context.Playlists
+                              where x.UserName.Equals(username,StringComparison.OrdinalIgnoreCase) && 
+                              x.Name.Equals(playlistname,StringComparison.OrdinalIgnoreCase)
+                              select x).FirstOrDefault();
+                if (exists == null)
+                {
+                    throw new Exception("Playlist Has beem removed from the system");
+                }
+                else
+                {
+                    //  YES: create a list of playlisttracks that are to be kept
+                    var trackskept = exists.PlaylistTracks
+                        .Where(tr => !trackstodelete.Any(tod => tr.TrackId == tod))
+                        .Select(tr => tr).ToList();
+                    //stage removal of tracks
+                    PlaylistTrack item = null;
+                    foreach(var dtrackid in trackstodelete)
+                    {
+                        item = exists.PlaylistTracks
+                            .Where(tr => tr.TrackId == dtrackid)
+                            .FirstOrDefault();
+                        if(item != null)
+                        {
+                            exists.PlaylistTracks.Remove(item);
+                        }
+                      
+                    }
+                    //renumbering of kept tracks an stage update
+                    int number = 1;
+                    trackskept.Sort((x, y) => x.TrackNumber.CompareTo(y.TrackNumber));
+                    foreach(var tkept in trackskept)
+                    {
+                        tkept.TrackNumber = number;
+                        context.Entry(tkept).Property(y => y.TrackNumber).IsModified = true;
+                        number++;
+                    }
+                    //commit
+                    context.SaveChanges();
+                }
 
             }
         }//eom
