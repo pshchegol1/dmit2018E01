@@ -334,7 +334,7 @@ namespace Jan2018DemoWebsite.SamplePages
                             PlayList.DataSource = datainfo;
                             PlayList.DataBind();
 
-                        }, "Adding a Track", "Track Has been added to the Play List");
+                        }, "Deleting a Track", "Track Has been Deleted from the Play List");
                     }
                 }
             }
