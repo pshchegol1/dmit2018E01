@@ -31,11 +31,11 @@ namespace Jan2018DemoWebsite.SamplePages
                     int? customerid = sysmgr.GetCurrentUserCustomerId(username);
                     if (customerid.HasValue)
                     {
-                        MessageUserControl.TryRun((()=> {
+                        MessageUserControl.TryRun(()=> {
                            CustomerController sysmg = new CustomerController();
                            Customer info = sysmg.Customer_Get(customerid.Value);
                            CustomerName.Text = info.FullName;
-                         }));
+                         });
                     }
                     else
                     {
