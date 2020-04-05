@@ -1,0 +1,36 @@
+OrderDetailID = x.OrderDetail.OrderDetailID,
+                                  Item = x.OrderDetail.Product.ItemName,
+                                  QuantityOrdered = x.OrderDetail.Quantity * x.OrderDetail.OrderUnitSize,
+                                  OrderedUnits = x.OrderDetail.Quantity + " x case of " + x.OrderDetail.OrderUnitSize,
+                                  QuantityOutstanding = (x.OrderDetail.Quantity * x.OrderDetail.OrderUnitSize) - x.OrderDetail.Product.QuantityOnHand,
+                                  ReceivedUnits = x.OrderDetail.Product.QuantityOnHand,
+                                  ReceivedUnitsLabel = " x case of " + x.OrderDetail.OrderUnitSize,
+                                  RejectedUnits = x.ItemQuantity,
+                                  Reason = x.ReceiveOrder.Order.Comment,
+                                  SalvagedItems = x.OrderDetail.OrderUnitSize - x.OrderDetail.Product.QuantityOnHand
+
+
+
+if quantity outstanding == 0
+recieved units = "";
+
+clear unordered Items table
+
+
+
+if returned ddl is == null
+messageusercontrol.showinfo('');
+
+
+
+
+ProductID = x.OrderDetail.ProductID,
+                                  Item = x.OrderDetail.Product.ItemName,
+                                  QuantityOrdered = x.OrderDetail.Quantity * x.OrderDetail.OrderUnitSize,
+                                  OrderedUnits = x.OrderDetail.Quantity + " x case of " + x.OrderDetail.OrderUnitSize,
+                                  QuantityOutstanding = (x.OrderDetail.Quantity * x.OrderDetail.OrderUnitSize) - x.OrderDetail.Product.QuantityOnHand,
+                                  ReceivedUnits = x.OrderDetail.Quantity,
+                                  ReceivedUnitsLabel = " x case of " + x.OrderDetail.OrderUnitSize,
+                                  RejectedUnits = x.ItemQuantity,
+                                  Reason = x.Comment,
+                                  SalvagedItems = x.OrderDetail.OrderUnitSize - x.OrderDetail.Product.QuantityOnHand
